@@ -6,41 +6,39 @@ import {
   Image,
   Dimensions,
   SafeAreaView,
-  Alert,
   ScrollView,
   Animated,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SettingsScreen from './SettingsScreen';
+import SettingsTieKnotsScreen from './SettingsTieKnotsScreen';
 
 import climbingData from '../components/climbingData';
 import boatingData from '../components/boatingData';
 import fishingData from '../components/fishingData';
-import FavouritesScreen from './FavouritesScreen';
+import FavouritesTieKnotsScreen from './FavouritesTieKnotsScreen';
 import TieKnotsGamesScreen from './TieKnotsGamesScreen';
 
-const fontSFProDisplayRegular = 'SF-Pro-Display-Regular';
 const fontSProTextRegular = 'SFProText-Regular';
 
-const bottomBtns = [
+const bottomTieKnotsBtns = [
   {
     id: 1,
-    screen: 'AdmiralGames',
-    admiralBtnIcon: require('../assets/icons/admiralUpIcons/admiralGameIcon.png'),
+    tieKnotsScreen: 'AdmiralGames',
+    tieKnotsBtnIcon: require('../assets/icons/admiralUpIcons/admiralGameIcon.png'),
   },
   {
     id: 3,
-    screen: 'Favourites',
-    admiralBtnIcon: require('../assets/icons/admiralUpIcons/admiralFavoriteIcon.png'),
+    tieKnotsScreen: 'Favourites',
+    tieKnotsBtnIcon: require('../assets/icons/admiralUpIcons/admiralFavoriteIcon.png'),
   },
   {
     id: 4,
-    screen: 'Settings',
-    admiralBtnIcon: require('../assets/icons/admiralUpIcons/admiralSettingsIcon.png'),
+    tieKnotsScreen: 'Settings',
+    tieKnotsBtnIcon: require('../assets/icons/admiralUpIcons/admiralSettingsIcon.png'),
   },
 ]
 
-const activities = [
+const tieKnotsActivities = [
   {
     id: 1,
     title: 'Climbing',
@@ -59,37 +57,21 @@ const activities = [
 
 ]
 
-const HomeScreen = () => {
+const HomeTieKnotsScreen = () => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-  const [selectedAdmiralScreen, setSelectedAdmiralScreen] = useState('Home');
+  const [selectedTieKnotsScreen, setSelectedTieKnotsScreen] = useState('Home');
 
-  const [coinCollection, setCoinCollection] = useState([]);
-  const [selectedActivityCategory, setSelectedActivityCategory] = useState(null);
+  const [selectedTieKnotsActivityCategory, setSelectedTieKnotsActivityCategory] = useState(null);
   const [selectedKnot, setSelectedKnot] = useState(null);
   const [isActivityVisible, setIsActivityVisible] = useState(false);
-  const [isCoinGameStarted, setIsCoinGameStarted] = useState(false);
   const [isKnotVisible, setIsKnotVisible] = useState(false);
   const [savedKnots, setSavedKnots] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const slidesRef = useRef(null);
+  const [currentTieKnotIndex, setCurrentTieKnotIndex] = useState(0);
+  const scrollTieKnotsX = useRef(new Animated.Value(0)).current;
+  const slidesTieKnotsRef = useRef(null);
 
-  const loadCoinCollection = async () => {
-    try {
-      const storedCollection = await AsyncStorage.getItem('coinCollection');
-      const parsedCollection = storedCollection ? JSON.parse(storedCollection) : [];
-      setCoinCollection(parsedCollection);
-    } catch (error) {
-      console.error('Error loading coinCollection:', error);
-    }
-  };
-
-  useEffect(() => {
-    loadCoinCollection();
-  }, []);
-
-  const getKnotsDataByCategory = (activityCtgr) => {
-    switch (activityCtgr) {
+  const getKnotsDataByCategory = (activityTieKnotCtgr) => {
+    switch (activityTieKnotCtgr) {
       case 'Climbing':
         return climbingData;
       case 'Boating':
@@ -101,15 +83,7 @@ const HomeScreen = () => {
     }
   };
 
-  const knotsData = getKnotsDataByCategory(selectedActivityCategory);
-
-  useEffect(() => {
-    console.log('selectedKnot:', selectedKnot);
-  }, [selectedKnot]);
-
-  useEffect(() => {
-    console.log('knotsData:', knotsData);
-  }, [knotsData]);
+  const knotsData = getKnotsDataByCategory(selectedTieKnotsActivityCategory);
 
   useEffect(() => {
     const fetchSavedKnots = async () => {
@@ -122,7 +96,7 @@ const HomeScreen = () => {
     };
 
     fetchSavedKnots();
-  }, [selectedActivityCategory]);
+  }, [selectedTieKnotsActivityCategory]);
 
 
   const isKnotSaved = (thisKnot) => {
@@ -140,12 +114,10 @@ const HomeScreen = () => {
         const updatedKnots = [knot, ...parsedKnots];
         await AsyncStorage.setItem('savedKnots', JSON.stringify(updatedKnots));
         setSavedKnots(updatedKnots);
-        console.log('knot was saved');
       } else {
         const updatedKnots = parsedKnots.filter((loc) => loc.id !== knot.id);
         await AsyncStorage.setItem('savedKnots', JSON.stringify(updatedKnots));
         setSavedKnots(updatedKnots);
-        console.log('knot was deleted');
       }
     } catch (error) {
       console.error('error of save/delete knot:', error);
@@ -154,58 +126,58 @@ const HomeScreen = () => {
 
   return (
     <View style={{
-      backgroundColor: '#01173e',
+      width: dimensions.width,
       flex: 1,
       height: dimensions.height,
-      width: dimensions.width,
+      backgroundColor: '#01173e',
     }}>
-      {selectedAdmiralScreen === 'Home' ? (
+      {selectedTieKnotsScreen === 'Home' ? (
         !isActivityVisible ? (
           <SafeAreaView style={{
-            flex: 1,
             paddingHorizontal: dimensions.width * 0.05,
+            flex: 1,
             width: dimensions.width,
           }}>
             <View style={{
-              width: dimensions.width,
+              paddingHorizontal: dimensions.width * 0.05,
               alignSelf: 'flex-start',
               marginBottom: dimensions.height * 0.025,
               flexDirection: 'row',
               justifyContent: 'space-between',
-              paddingHorizontal: dimensions.width * 0.05,
+              width: dimensions.width,
             }}>
               <Text
                 style={{
-                  fontFamily: fontSProTextRegular,
-                  color: 'white',
-                  fontSize: dimensions.width * 0.055,
                   textAlign: 'left',
                   fontWeight: 700,
+                  color: 'white',
+                  fontSize: dimensions.width * 0.055,
+                  fontFamily: fontSProTextRegular,
                 }}>
                 All knots
               </Text>
 
               <View style={{
-                flexDirection: 'row',
+                alignSelf: 'flex-start',
                 alignItems: 'center',
                 justifyContent: 'center',
-                alignSelf: 'flex-start',
+                flexDirection: 'row',
               }}>
-                {bottomBtns.map((button, index) => (
+                {bottomTieKnotsBtns.map((button, index) => (
                   <TouchableOpacity
                     key={button.id}
-                    onPress={() => setSelectedAdmiralScreen(button.screen)}
+                    onPress={() => setSelectedTieKnotsScreen(button.tieKnotsScreen)}
                     style={{
                       paddingHorizontal: dimensions.height * 0.014,
                       alignItems: 'center',
                     }}
                   >
                     <Image
-                      source={button.admiralBtnIcon}
+                      source={button.tieKnotsBtnIcon}
                       style={{
-                        width: dimensions.height * 0.028,
                         height: dimensions.height * 0.028,
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        width: dimensions.height * 0.028,
                       }}
                       resizeMode="contain"
                     />
@@ -221,11 +193,11 @@ const HomeScreen = () => {
             }} contentContainerStyle={{
               paddingBottom: dimensions.height * 0.16,
             }}>
-              {activities.map((activity, index) => (
+              {tieKnotsActivities.map((activity, index) => (
                 <TouchableOpacity
                   key={activity.id}
                   onPress={() => {
-                    setSelectedActivityCategory(activity.title);
+                    setSelectedTieKnotsActivityCategory(activity.title);
                     setIsActivityVisible(true);
                   }}
                   style={{
@@ -236,65 +208,63 @@ const HomeScreen = () => {
                   <Image
                     source={activity.image}
                     style={{
-                      width: dimensions.width * 0.9,
                       height: dimensions.height * 0.25,
                       borderRadius: dimensions.width * 0.043,
+                      width: dimensions.width * 0.9,
                     }}
                   />
                 </TouchableOpacity>
               ))}
 
               <View style={{
-                width: dimensions.width * 0.9,
+                backgroundColor: '#02338A',
                 height: dimensions.height * 0.25,
                 alignSelf: 'center',
-                borderRadius: dimensions.width * 0.043,
-                backgroundColor: '#02338A',
-                justifyContent: 'center',
-                alignItems: 'center',
+                elevation: 3,
                 shadowColor: '#000',
+                justifyContent: 'center',
+                shadowOpacity: 0.28,
+                alignItems: 'center',
+                width: dimensions.width * 0.9,
                 shadowOffset: {
                   width: 0,
                   height: 3,
                 },
-                shadowOpacity: 0.28,
+                borderRadius: dimensions.width * 0.043,
                 shadowRadius: 5,
-                elevation: 3,
               }}>
                 <Text
                   style={{
-                    fontFamily: fontSProTextRegular,
-                    color: 'white',
-                    fontSize: dimensions.width * 0.055,
-                    textAlign: 'left',
                     fontWeight: 700,
+                    color: 'white',
+                    textAlign: 'left',
+                    fontSize: dimensions.width * 0.055,
+                    fontFamily: fontSProTextRegular,
                   }}>
                   Soon
                 </Text>
-
               </View>
-
             </ScrollView>
           </SafeAreaView>
         ) : (
           <SafeAreaView style={{
+            width: dimensions.width,
             flex: 1,
             paddingHorizontal: dimensions.width * 0.05,
-            width: dimensions.width,
           }}>
             <View style={{
-              width: dimensions.width,
-              alignSelf: 'flex-start',
+              paddingHorizontal: dimensions.width * 0.05,
+              justifyContent: 'space-between',
               marginBottom: dimensions.height * 0.025,
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: dimensions.width * 0.05,
+              width: dimensions.width,
+              alignSelf: 'flex-start',
             }}>
               <View style={{
-                flexDirection: 'row',
-                alignItems: 'center',
                 justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'row',
               }}>
                 <TouchableOpacity style={{
                   marginRight: dimensions.width * 0.043,
@@ -310,21 +280,21 @@ const HomeScreen = () => {
                   <Image
                     source={require('../assets/icons/admiralBackIcon.png')}
                     style={{
-                      width: dimensions.height * 0.05,
                       height: dimensions.height * 0.05,
+                      width: dimensions.height * 0.05,
                     }}
                     resizeMode="contain"
                   />
                 </TouchableOpacity>
                 <Text
                   style={{
-                    fontFamily: fontSProTextRegular,
-                    color: 'white',
-                    fontSize: dimensions.width * 0.059,
-                    textAlign: 'left',
                     fontWeight: 700,
+                    color: 'white',
+                    textAlign: 'left',
+                    fontSize: dimensions.width * 0.059,
+                    fontFamily: fontSProTextRegular,
                   }}>
-                  {selectedActivityCategory}
+                  {selectedTieKnotsActivityCategory}
                 </Text>
               </View>
               <TouchableOpacity style={{
@@ -363,46 +333,46 @@ const HomeScreen = () => {
                       setIsKnotVisible(true);
                     }}
                     style={{
+                      marginBottom: dimensions.height * 0.034,
                       width: dimensions.width * 0.9,
                       alignSelf: 'center',
-                      marginBottom: dimensions.height * 0.034,
                     }}>
                     <Image
                       source={knot.previewImage}
                       style={{
-                        width: dimensions.width * 0.9,
-                        height: dimensions.height * 0.25,
                         borderRadius: dimensions.width * 0.043,
+                        height: dimensions.height * 0.25,
+                        width: dimensions.width * 0.9,
                       }}
                     />
                     <View style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
+                      width: dimensions.width * 0.9,
                       alignItems: 'center',
                       marginTop: dimensions.height * 0.014,
-                      width: dimensions.width * 0.9,
+                      justifyContent: 'space-between',
+                      flexDirection: 'row',
                     }}>
                       <View style={{
                         width: dimensions.width * 0.77,
                       }}>
                         <Text
                           style={{
-                            fontFamily: fontSProTextRegular,
-                            color: 'white',
                             fontSize: dimensions.width * 0.055,
+                            color: 'white',
                             textAlign: 'left',
                             fontWeight: 700,
+                            fontFamily: fontSProTextRegular,
                           }}>
                           {knot.title}
                         </Text>
                         <Text
                           style={{
-                            fontFamily: fontSProTextRegular,
+                            maxWidth: dimensions.width * 0.77,
                             color: '#999999',
+                            fontFamily: fontSProTextRegular,
                             fontSize: dimensions.width * 0.037,
                             textAlign: 'left',
                             fontWeight: 400,
-                            maxWidth: dimensions.width * 0.77,
                           }}
                           numberOfLines={1}
                           ellipsizeMode='tail'
@@ -434,28 +404,28 @@ const HomeScreen = () => {
 
                 <View style={{
                   width: dimensions.width * 0.9,
-                  height: dimensions.height * 0.25,
-                  alignSelf: 'center',
+                  shadowOpacity: 0.28,
+                  elevation: 3,
                   borderRadius: dimensions.width * 0.043,
                   backgroundColor: '#02338A',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  height: dimensions.height * 0.25,
                   shadowColor: '#000',
                   shadowOffset: {
                     width: 0,
                     height: 3,
                   },
-                  shadowOpacity: 0.28,
+                  alignSelf: 'center',
                   shadowRadius: 5,
-                  elevation: 3,
                 }}>
                   <Text
                     style={{
-                      fontFamily: fontSProTextRegular,
+                      fontWeight: 700,
+                      textAlign: 'left',
                       color: 'white',
                       fontSize: dimensions.width * 0.055,
-                      textAlign: 'left',
-                      fontWeight: 700,
+                      fontFamily: fontSProTextRegular,
                     }}>
                     Soon
                   </Text>
@@ -477,11 +447,11 @@ const HomeScreen = () => {
                     horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
-                    onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+                    onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollTieKnotsX } } }], {
                       useNativeDriver: false,
                     })}
                     scrollEventThrottle={32}
-                    ref={slidesRef}
+                    ref={slidesTieKnotsRef}
                   >
                     {selectedKnot.stepImages.map((item, index) => {
                       if (index < selectedKnot.stepImages.length) {
@@ -497,10 +467,10 @@ const HomeScreen = () => {
                               <Image
                                 source={selectedKnot.stepImages[index].image}
                                 style={{
-                                  width: dimensions.width * 0.9,
+                                  borderRadius: dimensions.width * 0.043,
                                   alignSelf: 'center',
                                   height: dimensions.height * 0.25,
-                                  borderRadius: dimensions.width * 0.043,
+                                  width: dimensions.width * 0.9,
                                 }}
                                 resizeMode='stretch'
                               />
@@ -514,13 +484,13 @@ const HomeScreen = () => {
                 </View>
 
                 <View style={{
-                  width: dimensions.width * 0.9,
-                  alignSelf: 'center',
                   marginTop: dimensions.height * 0.014,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  alignSelf: 'center',
                   paddingVertical: dimensions.height * 0.016,
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: dimensions.width * 0.9,
+                  flexDirection: 'row',
                 }}>
                   <Image
                     source={require('../assets/icons/knotLeftIcon.png')}
@@ -531,56 +501,56 @@ const HomeScreen = () => {
                     resizeMode='contain'
                   />
                   <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     alignSelf: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
                     flex: 1,
+                    alignItems: 'center',
                   }}>
                     <TouchableOpacity onPress={() => {
-                      if (currentIndex > 0) {
-                        const newIndex = currentIndex - 1;
-                        slidesRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
-                        setCurrentIndex(newIndex);
+                      if (currentTieKnotIndex > 0) {
+                        const newIndex = currentTieKnotIndex - 1;
+                        slidesTieKnotsRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
+                        setCurrentTieKnotIndex(newIndex);
                       }
                     }}
-                      disabled={currentIndex === 0}
+                      disabled={currentTieKnotIndex === 0}
                     >
                       <Image
                         source={require('../assets/icons/chevronLeftIcon.png')}
                         style={{
                           width: dimensions.height * 0.03,
                           height: dimensions.height * 0.03,
-                          opacity: currentIndex > 0 ? 1 : 0.5,
+                          opacity: currentTieKnotIndex > 0 ? 1 : 0.5,
                         }}
                         resizeMode='contain'
                       />
                     </TouchableOpacity>
 
                     <View style={{
-                      width: dimensions.height * 0.037,
-                      height: dimensions.height * 0.037,
                       borderRadius: dimensions.height * 0.05,
-                      backgroundColor: '#F1B900',
+                      height: dimensions.height * 0.037,
                       marginHorizontal: dimensions.width * 0.05,
+                      backgroundColor: '#F1B900',
+                      width: dimensions.height * 0.037,
                     }}>
                     </View>
 
                     <TouchableOpacity onPress={() => {
-                      if (currentIndex < selectedKnot.stepImages.length - 1) {
-                        const newIndex = currentIndex + 1;
-                        slidesRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
-                        setCurrentIndex(newIndex);
+                      if (currentTieKnotIndex < selectedKnot.stepImages.length - 1) {
+                        const newIndex = currentTieKnotIndex + 1;
+                        slidesTieKnotsRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
+                        setCurrentTieKnotIndex(newIndex);
                       }
                     }}
-                      disabled={currentIndex === selectedKnot.stepImages.length - 1}
+                      disabled={currentTieKnotIndex === selectedKnot.stepImages.length - 1}
                     >
                       <Image
                         source={require('../assets/icons/chevronRightIcon.png')}
                         style={{
                           width: dimensions.height * 0.03,
                           height: dimensions.height * 0.03,
-                          opacity: currentIndex < selectedKnot.stepImages.length - 1 ? 1 : 0.5,
+                          opacity: currentTieKnotIndex < selectedKnot.stepImages.length - 1 ? 1 : 0.5,
                         }}
                         resizeMode='contain'
                       />
@@ -589,36 +559,35 @@ const HomeScreen = () => {
                   <Image
                     source={require('../assets/icons/knotRightIcon.png')}
                     style={{
-                      width: dimensions.height * 0.037,
                       height: dimensions.height * 0.037,
+                      width: dimensions.height * 0.037,
                     }}
                     resizeMode='contain'
                   />
-
                 </View>
 
                 <Text
                   style={{
+                    textAlign: 'left',
+                    fontSize: dimensions.width * 0.05,
+                    paddingHorizontal: dimensions.width * 0.05,
                     fontFamily: fontSProTextRegular,
                     color: 'white',
-                    fontSize: dimensions.width * 0.05,
-                    textAlign: 'left',
-                    fontWeight: 700,
-                    paddingHorizontal: dimensions.width * 0.05,
                     marginTop: dimensions.height * 0.01,
+                    fontWeight: 700,
                   }}>
                   {selectedKnot?.title}
                 </Text>
                 <Text
                   style={{
-                    fontFamily: fontSProTextRegular,
-                    color: '#999999',
+                    marginTop: dimensions.height * 0.019,
                     fontSize: dimensions.width * 0.04,
                     textAlign: 'left',
-                    fontWeight: 500,
+                    color: '#999999',
                     width: dimensions.width * 0.9,
                     paddingHorizontal: dimensions.width * 0.05,
-                    marginTop: dimensions.height * 0.019,
+                    fontWeight: 500,
+                    fontFamily: fontSProTextRegular,
                   }}
                 >
                   {selectedKnot.description}
@@ -627,16 +596,15 @@ const HomeScreen = () => {
             )}
           </SafeAreaView>
         )
-
-      ) : selectedAdmiralScreen === 'Settings' ? (
-        <SettingsScreen setSelectedAdmiralScreen={setSelectedAdmiralScreen} selectedAdmiralScreen={selectedAdmiralScreen} />
-      ) : selectedAdmiralScreen === 'Favourites' ? (
-        <FavouritesScreen setSelectedAdmiralScreen={setSelectedAdmiralScreen} savedKnots={savedKnots} setSavedKnots={setSavedKnots} />
-      ) : selectedAdmiralScreen === 'AdmiralGames' ? (
-        <TieKnotsGamesScreen setSelectedAdmiralScreen={setSelectedAdmiralScreen} selectedAdmiralScreen={selectedAdmiralScreen} />
+      ) : selectedTieKnotsScreen === 'Settings' ? (
+        <SettingsTieKnotsScreen setSelectedTieKnotsScreen={setSelectedTieKnotsScreen} selectedTieKnotsScreen={selectedTieKnotsScreen} />
+      ) : selectedTieKnotsScreen === 'Favourites' ? (
+        <FavouritesTieKnotsScreen setSelectedTieKnotsScreen={setSelectedTieKnotsScreen} savedKnots={savedKnots} setSavedKnots={setSavedKnots} />
+      ) : selectedTieKnotsScreen === 'AdmiralGames' ? (
+        <TieKnotsGamesScreen setSelectedTieKnotsScreen={setSelectedTieKnotsScreen} selectedTieKnotsScreen={selectedTieKnotsScreen} />
       ) : null}
     </View>
   );
 };
 
-export default HomeScreen;
+export default HomeTieKnotsScreen;

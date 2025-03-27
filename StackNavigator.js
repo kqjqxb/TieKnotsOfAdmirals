@@ -4,14 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import HomeScreen from './src/screens/HomeScreen';
+import HomeTieKnotsScreen from './src/screens/HomeTieKnotsScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { UserProvider, UserContext } from './src/context/UserContext';
 import { Provider, useDispatch } from 'react-redux';
 import store from './src/redux/store';
 import { loadUserData } from './src/redux/userSlice';
-import LoadingAdmiralTieKnotsScreen from './src/screens/LoadingAdmiralTieKnotsScreen';
+import LoadingTieKnotsScreen from './src/screens/LoadingTieKnotsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -75,9 +75,9 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={'LoadingAdmiralTieKnotsScreen'}>
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="LoadingAdmiralTieKnotsScreen" component={LoadingAdmiralTieKnotsScreen} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName={'LoadingTieKnotsScreen'}>
+        <Stack.Screen name="Home" component={HomeTieKnotsScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="LoadingTieKnotsScreen" component={LoadingTieKnotsScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

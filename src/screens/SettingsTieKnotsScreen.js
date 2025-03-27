@@ -12,75 +12,76 @@ import {
 const fontSFProDisplayRegular = 'SF-Pro-Display-Regular';
 const fontSFProTextRegular = 'SFProText-Regular';
 
-const admiralTieKnotsLinkButtons = [
+const tieKnotsLinkButtons = [
   {
     id: 1,
-    admiralTieKnotsButtonTitle: 'Privacy Policy',
-    admiralTieKnotsButtonLink: '',
-    admiralTieKnotsIcon: require('../assets/icons/admiralPrivacyIcon.png'),
+    tieKnotsButtonTitle: 'Privacy Policy',
+    tieKnotsButtonLink: 'https://www.termsfeed.com/live/a79df892-98ee-4c61-893c-9422702a8f5a',
+    tieKnotsIcon: require('../assets/icons/admiralPrivacyIcon.png'),
   },
   {
     id: 2,
-    admiralTieKnotsButtonTitle: 'Terms of Use',
-    admiralTieKnotsButtonLink: '',
-    admiralTieKnotsIcon: require('../assets/icons/admiralTermsIcon.png'),
+    tieKnotsButtonTitle: 'Terms of Use',
+    tieKnotsButtonLink: 'https://www.termsfeed.com/live/5d50a43c-14db-4c91-9321-fb1e07881648',
+    tieKnotsIcon: require('../assets/icons/admiralTermsIcon.png'),
   }
 ]
 
-const SettingsScreen = ({ setSelectedAdmiralScreen, }) => {
+const SettingsTieKnotsScreen = ({ setSelectedTieKnotsScreen, }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
 
   return (
     <View style={{
-      flex: 1,
+      alignSelf: 'center',
+      height: dimensions.height,
       alignItems: 'center',
       width: dimensions.width,
-      height: dimensions.height,
-      alignSelf: 'center',
+      flex: 1,
     }}>
-
       <SafeAreaView style={{
+        paddingHorizontal: dimensions.width * 0.0493,
         flex: 1,
-        paddingHorizontal: dimensions.width * 0.05,
         width: dimensions.width,
       }}>
         <View style={{
-          width: dimensions.width,
-          alignSelf: 'flex-start',
-          marginBottom: dimensions.height * 0.025,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
           paddingHorizontal: dimensions.width * 0.05,
+          alignSelf: 'flex-start',
+          alignItems: 'center',
+          flexDirection: 'row',
+          width: dimensions.width,
+          justifyContent: 'space-between',
+          marginBottom: dimensions.height * 0.025,
         }}>
           <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
             justifyContent: 'center',
+            
+            alignItems: 'center',
+
+            flexDirection: 'row',
           }}>
             <TouchableOpacity style={{
               marginRight: dimensions.width * 0.043,
             }}
               onPress={() => {
-                setSelectedAdmiralScreen('Home');
+                setSelectedTieKnotsScreen('Home');
               }}
             >
               <Image
                 source={require('../assets/icons/admiralBackIcon.png')}
                 style={{
-                  width: dimensions.height * 0.05,
                   height: dimensions.height * 0.05,
+                  width: dimensions.height * 0.05,
                 }}
                 resizeMode="contain"
               />
             </TouchableOpacity>
             <Text
               style={{
-                fontFamily: fontSFProTextRegular,
+                fontWeight: 700,
                 color: 'white',
                 fontSize: dimensions.width * 0.059,
+                fontFamily: fontSFProTextRegular,
                 textAlign: 'left',
-                fontWeight: 700,
               }}>
               Settings
             </Text>
@@ -89,41 +90,41 @@ const SettingsScreen = ({ setSelectedAdmiralScreen, }) => {
 
         <View style={{ marginTop: dimensions.height * 0.01 }}></View>
 
-        {admiralTieKnotsLinkButtons.map((button) => (
+        {tieKnotsLinkButtons.map((button) => (
           <TouchableOpacity
             key={button.id}
             onPress={() => {
-              Linking.openURL(button.admiralTieKnotsButtonLink);
+              Linking.openURL(button.tieKnotsButtonLink);
             }}
             style={{
-              width: dimensions.width * 0.9,
-              height: dimensions.height * 0.07,
+              flexDirection: 'row',
+              height: dimensions.height * 0.0691,
               backgroundColor: 'white',
-              borderRadius: dimensions.width * 0.039,
-              paddingHorizontal: dimensions.width * 0.05,
+              alignItems: 'center',
+              paddingHorizontal: dimensions.width * 0.0493,
               alignSelf: 'center',
               marginTop: button.id !== 1 ? dimensions.height * 0.023 : 0,
-              flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'center',
+              borderRadius: dimensions.width * 0.039,
+              width: dimensions.width * 0.892,
             }}>
             <Text
               style={{
-                fontFamily: fontSFProDisplayRegular,
+                alignSelf: 'center',
+                fontWeight: 600,
                 color: 'black',
                 fontSize: dimensions.width * 0.046,
                 textAlign: 'center',
-                alignSelf: 'center',
-                fontWeight: 600,
+                fontFamily: fontSFProDisplayRegular,
               }}>
-              {button.admiralTieKnotsButtonTitle}
+              {button.tieKnotsButtonTitle}
             </Text>
 
             <Image
-              source={button.admiralTieKnotsIcon}
+              source={button.tieKnotsIcon}
               style={{
-                width: dimensions.height * 0.031,
                 height: dimensions.height * 0.031,
+                width: dimensions.height * 0.031,
               }}
               resizeMode='contain'
             />
@@ -134,15 +135,15 @@ const SettingsScreen = ({ setSelectedAdmiralScreen, }) => {
       <Image
         source={require('../assets/images/settingsAdmiralImage.png')}
         style={{
-          width: dimensions.width * 0.43,
-          height: dimensions.height * 0.55,
+          shadowRadius: 5,
+          shadowOffset: { width: 0, height: 0 },
           position: 'absolute',
           bottom: -dimensions.height * 0.1,
-          left: dimensions.width * 0.111,
+          height: dimensions.height * 0.55,
           shadowColor: '#000',
-          shadowOffset: { width: 0, height: 0 },
           shadowOpacity: 0.5,
-          shadowRadius: 5,
+          left: dimensions.width * 0.111,
+          width: dimensions.width * 0.43,
           elevation: 5,
         }}
         resizeMode='contain'
@@ -151,4 +152,4 @@ const SettingsScreen = ({ setSelectedAdmiralScreen, }) => {
   );
 };
 
-export default SettingsScreen;
+export default SettingsTieKnotsScreen;

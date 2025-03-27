@@ -7,12 +7,12 @@ workflows:
       groups:
         - creds
       vars:
-        XCODE_WORKSPACE: "CoinCollector.xcworkspace" # <----
-        XCODE_SCHEME: "CoinCollector" # <----
-        BUNDLE_ID: "com.coin.collector.app" # <----
-        APP_STORE_APP_ID: 6743238725 # <----
-        APP_STORE_CONNECT_KEY_ID: "M62P8R2SN2" # <----
-        APP_STORE_CONNECT_ISSUER_ID: "5133a975-6e3c-4245-b3a3-f76945278e34" # <----
+        XCODE_WORKSPACE: "TieKnotsOfAdmirals.xcworkspace" # <----
+        XCODE_SCHEME: "TieKnotsOfAdmirals" # <----
+        BUNDLE_ID: "com.tie.knots.of.admirals.app" # <----
+        APP_STORE_APP_ID: 6743853786 # <----
+        APP_STORE_CONNECT_KEY_ID: "B7GX5B4D5Q" # <----
+        APP_STORE_CONNECT_ISSUER_ID: "4941430f-3f11-4b4d-9917-52e0f227c4af" # <----
         node: latest
         xcode: latest
         cocoapods: default
@@ -52,7 +52,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - zenonkubat1@gmail.com       # <----
+          - lelatabliashvili92@gmail.com       # <----
         notify:
           success: true
           failure: false

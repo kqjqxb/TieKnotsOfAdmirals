@@ -13,15 +13,10 @@ import {
 const fontSFProTextRegular = 'SFProText-Regular';
 
 
-const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots }) => {
+const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSavedKnots }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
   const [isKnotVisible, setIsKnotVisible] = useState(false);
   const [selectedKnot, setSelectedKnot] = useState(null);
-
-
-  const isKnotSaved = (thisKnot) => {
-    return savedKnots.some((kn) => kn.id === thisKnot.id);
-  };
 
   const handleDeleteKnot = async (id) => {
     try {
@@ -40,25 +35,25 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
       width: dimensions.width,
     }}>
       <View style={{
-        width: dimensions.width,
-        alignSelf: 'flex-start',
+        justifyContent: 'space-between',
+        paddingHorizontal: dimensions.width * 0.05,
         marginBottom: dimensions.height * 0.025,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: dimensions.width * 0.05,
+        width: dimensions.width,
+        alignSelf: 'flex-start',
       }}>
         <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
           justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
         }}>
           <TouchableOpacity style={{
             marginRight: dimensions.width * 0.043,
           }}
             onPress={() => {
               if (!isKnotVisible) {
-                setSelectedAdmiralScreen('Home');
+                setSelectedTieKnotsScreen('Home');
               } else setIsKnotVisible(false);
             }}
           >
@@ -73,11 +68,11 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
           </TouchableOpacity>
           <Text
             style={{
-              fontFamily: fontSFProTextRegular,
-              color: 'white',
-              fontSize: dimensions.width * 0.059,
-              textAlign: 'left',
               fontWeight: 700,
+              color: 'white',
+              textAlign: 'left',
+              fontSize: dimensions.width * 0.059,
+              fontFamily: fontSFProTextRegular,
             }}>
             Favourites
           </Text>
@@ -109,32 +104,31 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
         }}>
           {savedKnots.length === 0 ? (
             <View style={{
-              width: dimensions.width * 0.9,
-              height: dimensions.height * 0.25,
               alignSelf: 'center',
+              height: dimensions.height * 0.25,
+              shadowColor: '#000',
               borderRadius: dimensions.width * 0.043,
               backgroundColor: '#02338A',
               justifyContent: 'center',
+              width: dimensions.width * 0.9,
               alignItems: 'center',
-              shadowColor: '#000',
               shadowOffset: {
                 width: 0,
                 height: 3,
               },
-              shadowOpacity: 0.28,
               shadowRadius: 5,
               elevation: 3,
+              shadowOpacity: 0.28,
               marginTop: dimensions.height * 0.23,
             }}>
               <Text
                 style={{
-                  fontFamily: fontSFProTextRegular,
+                  alignSelf: 'center',
                   color: 'white',
+                  fontWeight: 700,
                   fontSize: dimensions.width * 0.07,
                   textAlign: 'center',
-                  alignSelf: 'center',
-
-                  fontWeight: 700,
+                  fontFamily: fontSFProTextRegular,
                 }}>
                 No saved knots yet
               </Text>
@@ -162,11 +156,11 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
                   }}
                 />
                 <View style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginTop: dimensions.height * 0.014,
                   width: dimensions.width * 0.9,
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  marginTop: dimensions.height * 0.014,
+                  justifyContent: 'space-between',
                 }}>
                   <View style={{
                     width: dimensions.width * 0.77,
@@ -183,12 +177,12 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
                     </Text>
                     <Text
                       style={{
-                        fontFamily: fontSFProTextRegular,
-                        color: '#999999',
-                        fontSize: dimensions.width * 0.037,
-                        textAlign: 'left',
-                        fontWeight: 400,
                         maxWidth: dimensions.width * 0.77,
+                        fontFamily: fontSFProTextRegular,
+                        textAlign: 'left',
+                        fontSize: dimensions.width * 0.037,
+                        fontWeight: 400,
+                        color: '#999999',
                       }}
                       numberOfLines={1}
                       ellipsizeMode='tail'
@@ -243,11 +237,11 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
                   return (
                     <View key={item.id} style={{ width: dimensions.width * 0.9, flex: 1, justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center' }} >
                       <View style={{
-                        flexDirection: 'row',
-                        width: dimensions.width * 0.9,
-                        alignSelf: 'center',
                         alignItems: 'center',
+                        flexDirection: 'row',
                         marginTop: dimensions.height * 0.03,
+                        alignSelf: 'center',
+                        width: dimensions.width * 0.9,
                       }}>
                         <Image
                           source={selectedKnot.stepImages[index].image}
@@ -269,13 +263,13 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
           </View>
 
           <View style={{
-            width: dimensions.width * 0.9,
+            justifyContent: 'space-between',
             alignSelf: 'center',
             marginTop: dimensions.height * 0.014,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
             alignItems: 'center',
+            width: dimensions.width * 0.9,
             paddingVertical: dimensions.height * 0.016,
+            flexDirection: 'row',
           }}>
             <Image
               source={require('../assets/icons/knotLeftIcon.png')}
@@ -286,9 +280,9 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
               resizeMode='contain'
             />
             <View style={{
+              justifyContent: 'center',
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'center',
               alignSelf: 'center',
               flex: 1,
             }}>
@@ -304,20 +298,20 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
                 <Image
                   source={require('../assets/icons/chevronLeftIcon.png')}
                   style={{
-                    width: dimensions.height * 0.03,
-                    height: dimensions.height * 0.03,
                     opacity: currentIndex > 0 ? 1 : 0.5,
+                    height: dimensions.height * 0.03,
+                    width: dimensions.height * 0.03,
                   }}
                   resizeMode='contain'
                 />
               </TouchableOpacity>
 
               <View style={{
-                width: dimensions.height * 0.037,
-                height: dimensions.height * 0.037,
-                borderRadius: dimensions.height * 0.05,
                 backgroundColor: '#F1B900',
+                height: dimensions.height * 0.037,
                 marginHorizontal: dimensions.width * 0.05,
+                borderRadius: dimensions.height * 0.05,
+                width: dimensions.height * 0.037,
               }}>
               </View>
 
@@ -354,26 +348,26 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
 
           <Text
             style={{
-              fontFamily: fontSFProTextRegular,
+              marginTop: dimensions.height * 0.01,
               color: 'white',
+              paddingHorizontal: dimensions.width * 0.05,
               fontSize: dimensions.width * 0.05,
               textAlign: 'left',
+              fontFamily: fontSFProTextRegular,
               fontWeight: 700,
-              paddingHorizontal: dimensions.width * 0.05,
-              marginTop: dimensions.height * 0.01,
             }}>
             {selectedKnot?.title}
           </Text>
           <Text
             style={{
-              fontFamily: fontSFProTextRegular,
+              marginTop: dimensions.height * 0.019,
               color: '#999999',
               fontSize: dimensions.width * 0.04,
-              textAlign: 'left',
               fontWeight: 500,
+              fontFamily: fontSFProTextRegular,
               width: dimensions.width * 0.9,
               paddingHorizontal: dimensions.width * 0.05,
-              marginTop: dimensions.height * 0.019,
+              textAlign: 'left',
             }}
           >
             {selectedKnot.description}
@@ -384,4 +378,4 @@ const FavouritesScreen = ({ setSelectedAdmiralScreen, savedKnots, setSavedKnots 
   );
 };
 
-export default FavouritesScreen;
+export default FavouritesTieKnotsScreen;

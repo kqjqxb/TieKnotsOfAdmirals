@@ -14,10 +14,10 @@ export const saveUserData = createAsyncThunk('user/saveUserData', async (userDat
 
 export const loadUserData = createAsyncThunk('user/loadUserData', async () => {
   try {
-    const storedUser = await AsyncStorage.getItem('currentUser');
-    return storedUser ? JSON.parse(storedUser) : initialState;
+    const storedTieKnotUser = await AsyncStorage.getItem('currentUser');
+    return storedTieKnotUser ? JSON.parse(storedTieKnotUser) : initialState;
   } catch (error) {
-    console.error('Error loading user data:', error);
+    console.error('Error loading storedTieKnotUser data:', error);
     return initialState;
   }
 });

@@ -26,130 +26,131 @@ const games = [
   }
 ]
 
-const TieKnotsGamesScreen = ({ setSelectedAdmiralScreen, }) => {
+const TieKnotsGamesScreen = ({ setSelectedTieKnotsScreen, }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-  const [selectedGame, setSelectedGame] = useState(null);
-  const [isAdmiralGameStarted, setIsAdmiralGameStarted] = useState(false);
-  const [admiralGameType, setAdmiralGameType] = useState('');
-  const [currentAdmiralQuestionIndex, setCurrentAdmiralQuestionIndex] = useState(0);
-  const [selectedAdmiralAnswer, setSelectedAdmiralAnswer] = useState(null);
-  const [answerBgColor, setAnswerBgColor] = useState('white');
-  const [isReplyButtonActive, setIsReplyButtonActive] = useState(true);
-  const [correctAdmiralAnswers, setCorrectAdmiralAnswers] = useState(0);
-  const [wrongAdmiralAnswers, setWrongAdmiralAnswers] = useState(0);
-  const [admiralBorderColor, setAdmiralBorderColor] = useState('transparent');
 
-  const handleAnswerSelect = (isCorrect) => {
-    setIsReplyButtonActive(false);
+  const [isTieKnotsGameStarted, setIsTieKnotsGameStarted] = useState(false);
+  const [tieKnotsAdmiralGameType, setTieKnotsAdmiralGameType] = useState('');
+  const [currentTieKnotsQuestionIndex, setCurrentTieKnotsQuestionIndex] = useState(0);
+  const [selectedTieKnotsAnswer, setSelectedTieKnotsAnswer] = useState(null);
+  const [answerBgColor, setAnswerBgColor] = useState('#fff');
+  const [isTieKnotsReplyButtonActive, setIsTieKnotsReplyButtonActive] = useState(true);
+  const [correctTieKnotsAnswers, setCorrectTieKnotsAnswers] = useState(0);
+  const [wrongTieKnotsAnswers, setWrongTieKnotsAnswers] = useState(0);
+  const [tieKnotsBorderColor, setTieKnotsBorderColor] = useState('transparent');
 
-    const newCorrect = isCorrect ? correctAdmiralAnswers + 1 : correctAdmiralAnswers;
-    const newWrong = !isCorrect ? wrongAdmiralAnswers + 1 : wrongAdmiralAnswers;
+  const handleTieKnotsAnswerSelect = (isCorrect) => {
+    setIsTieKnotsReplyButtonActive(false);
+
+    const newTieCorrect = isCorrect ? correctTieKnotsAnswers + 1 : correctTieKnotsAnswers;
+    const newTieWrong = !isCorrect ? wrongTieKnotsAnswers + 1 : wrongTieKnotsAnswers;
 
     if (isCorrect) {
-      setCorrectAdmiralAnswers(newCorrect);
+      setCorrectTieKnotsAnswers(newTieCorrect);
       setAnswerBgColor('#F1B900');
     } else {
-      setWrongAdmiralAnswers(newWrong);
+      setWrongTieKnotsAnswers(newTieWrong);
       setAnswerBgColor('#F92525');
     }
 
     setTimeout(() => {
-      setIsReplyButtonActive(true);
-      setSelectedAdmiralAnswer(null);
-      setAnswerBgColor('white');
-      if (currentAdmiralQuestionIndex < admiralQuestionsData.length - 1) {
-        setCurrentAdmiralQuestionIndex(prev => prev + 1);
+      setIsTieKnotsReplyButtonActive(true);
+      setSelectedTieKnotsAnswer(null);
+      setAnswerBgColor('#fff');
+      if (currentTieKnotsQuestionIndex < admiralQuestionsData.length - 1) {
+        setCurrentTieKnotsQuestionIndex(prev => prev + 1);
       } else {
-        setIsAdmiralGameStarted(false);
-        setAdmiralGameType('');
+        setIsTieKnotsGameStarted(false);
+        setTieKnotsAdmiralGameType('');
         Alert.alert(
           'Game over',
-          `You have ${newCorrect} correct answers and ${newWrong} wrong answers`
+          `You have ${newTieCorrect} correct answers and ${newTieWrong} wrong answers`
         );
       }
     }, 500);
   };
 
   const handleKnotChoose = (isCorrect) => {
-    setIsReplyButtonActive(false);
+    setIsTieKnotsReplyButtonActive(false);
 
-    const newCorrect = isCorrect ? correctAdmiralAnswers + 1 : correctAdmiralAnswers;
-    const newWrong = !isCorrect ? wrongAdmiralAnswers + 1 : wrongAdmiralAnswers;
+    const newTieCorrect = isCorrect ? correctTieKnotsAnswers + 1 : correctTieKnotsAnswers;
+    const newTieWrong = !isCorrect ? wrongTieKnotsAnswers + 1 : wrongTieKnotsAnswers;
 
     if (isCorrect) {
-      setCorrectAdmiralAnswers(newCorrect);
-      setAdmiralBorderColor('#F1B900');
+      setCorrectTieKnotsAnswers(newTieCorrect);
+      setTieKnotsBorderColor('#F1B900');
     } else {
-      setWrongAdmiralAnswers(newWrong);
-      setAdmiralBorderColor('#F92525');
+      setWrongTieKnotsAnswers(newTieWrong);
+      setTieKnotsBorderColor('#F92525');
     }
 
     setTimeout(() => {
-      setIsReplyButtonActive(true);
-      setSelectedAdmiralAnswer(null);
-      setAdmiralBorderColor('transparent');
-      if (currentAdmiralQuestionIndex < admiralFindTheKnotData.length - 1) {
-        setCurrentAdmiralQuestionIndex(prev => prev + 1);
+      setIsTieKnotsReplyButtonActive(true);
+      setSelectedTieKnotsAnswer(null);
+      setTieKnotsBorderColor('transparent');
+      if (currentTieKnotsQuestionIndex < admiralFindTheKnotData.length - 1) {
+        setCurrentTieKnotsQuestionIndex(prev => prev + 1);
       } else {
-        setIsAdmiralGameStarted(false);
-        setAdmiralGameType('');
+        setIsTieKnotsGameStarted(false);
+        setTieKnotsAdmiralGameType('');
         Alert.alert(
           'Game over',
-          `You have ${newCorrect} correct answers and ${newWrong} wrong answers`
+          `You have ${newTieCorrect} correct answers and ${newTieWrong} wrong answers`
         );
       }
     }, 500);
   };
 
   useEffect(() => {
-    if(!isAdmiralGameStarted) {
-      setCurrentAdmiralQuestionIndex(0);
-      setSelectedAdmiralAnswer(null);
-      setAnswerBgColor('white');
-      setIsReplyButtonActive(true);
-      setCorrectAdmiralAnswers(0);
-      setWrongAdmiralAnswers(0);
-      setAdmiralBorderColor('transparent');
+    if (!isTieKnotsGameStarted) {
+      setCurrentTieKnotsQuestionIndex(0);
+      setSelectedTieKnotsAnswer(null);
+      setAnswerBgColor('#fff');
+      setIsTieKnotsReplyButtonActive(true);
+      setCorrectTieKnotsAnswers(0);
+      setWrongTieKnotsAnswers(0);
+      setTieKnotsBorderColor('transparent');
     }
-  }, [isAdmiralGameStarted]);
+  }, [isTieKnotsGameStarted]);
 
   return (
     <SafeAreaView style={{
-      flex: 1,
-      paddingHorizontal: dimensions.width * 0.05,
       width: dimensions.width,
+      paddingHorizontal: dimensions.width * 0.05,
+      flex: 1,
     }}>
       <View style={{
-        width: dimensions.width,
-        alignSelf: 'flex-start',
+        alignItems: 'center',
         marginBottom: dimensions.height * 0.025,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
         paddingHorizontal: dimensions.width * 0.05,
+        width: dimensions.width,
+        justifyContent: 'space-between',
+        alignSelf: 'flex-start',
       }}>
         <View style={{
-          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-        }}>
-          <TouchableOpacity style={{
-            marginRight: dimensions.width * 0.043,
-          }}
-            onPress={() => {
-              if (isAdmiralGameStarted) {
-                setIsAdmiralGameStarted(false);
-                setAdmiralGameType('');
-                setCurrentAdmiralQuestionIndex(0);
-                setSelectedAdmiralAnswer(null);
-                setAnswerBgColor('white');
-                setIsReplyButtonActive(true);
-                setCorrectAdmiralAnswers(0);
-                setWrongAdmiralAnswers(0);
-                setAdmiralBorderColor('transparent');
-                
 
-              } else setSelectedAdmiralScreen('Home');
+          flexDirection: 'row',
+        }}>
+          <TouchableOpacity
+            style={{
+              marginRight: dimensions.width * 0.043,
+            }}
+            onPress={() => {
+              if (isTieKnotsGameStarted) {
+                setTieKnotsBorderColor('transparent');
+                setTieKnotsAdmiralGameType('');
+                setAnswerBgColor('#fff');
+                setCurrentTieKnotsQuestionIndex(0);
+                setSelectedTieKnotsAnswer(null);
+                setIsTieKnotsGameStarted(false);
+                setCorrectTieKnotsAnswers(0);
+                setIsTieKnotsReplyButtonActive(true);
+                setWrongTieKnotsAnswers(0);
+
+              } else setSelectedTieKnotsScreen('Home');
             }}
           >
             <Image
@@ -163,108 +164,107 @@ const TieKnotsGamesScreen = ({ setSelectedAdmiralScreen, }) => {
           </TouchableOpacity>
           <Text
             style={{
-              fontFamily: fontSFProTextRegular,
-              color: 'white',
               fontSize: dimensions.width * 0.059,
+              color: '#fff',
               textAlign: 'left',
               fontWeight: 700,
+              fontFamily: fontSFProTextRegular,
             }}>
-            {isAdmiralGameStarted ? admiralGameType : 'Games'}
+            {isTieKnotsGameStarted ? tieKnotsAdmiralGameType : 'Games'}
           </Text>
         </View>
       </View>
 
-      {!isAdmiralGameStarted ? (
+      {!isTieKnotsGameStarted ? (
         games.map((game) => (
           <TouchableOpacity
             key={game.id}
             onPress={() => {
-              setSelectedGame(game);
-              setAdmiralGameType(game.title);
-              setIsAdmiralGameStarted(true);
+              setTieKnotsAdmiralGameType(game.title);
+              setIsTieKnotsGameStarted(true);
             }}
             style={{
-              width: dimensions.width * 0.9,
-              alignSelf: 'center',
               marginBottom: dimensions.height * 0.034,
+              alignSelf: 'center',
+              width: dimensions.width * 0.9,
             }}>
             <Image
               source={game.image}
               style={{
+                borderRadius: dimensions.width * 0.043,
                 width: dimensions.width * 0.9,
                 height: dimensions.height * 0.25,
-                borderRadius: dimensions.width * 0.043,
               }}
             />
             <Text
               style={{
-                fontFamily: fontSFProTextRegular,
-                color: 'white',
+                marginTop: dimensions.height * 0.014,
+                color: '#fff',
+                fontWeight: 700,
                 fontSize: dimensions.width * 0.055,
                 textAlign: 'left',
-                fontWeight: 700,
-                marginTop: dimensions.height * 0.014,
+                fontFamily: fontSFProTextRegular,
               }}>
               {game.title}
             </Text>
           </TouchableOpacity>
         ))
-      ) : isAdmiralGameStarted && admiralGameType === 'Knots quiz' ? (
+      ) : isTieKnotsGameStarted && tieKnotsAdmiralGameType === 'Knots quiz' ? (
         <View style={{
           alignSelf: 'center',
           width: dimensions.width,
         }}>
           <Image
-            source={admiralQuestionsData[currentAdmiralQuestionIndex].image}
+            source={admiralQuestionsData[currentTieKnotsQuestionIndex].image}
             style={{
-              width: dimensions.width * 0.9,
+              alignSelf: 'center',
               height: dimensions.height * 0.25,
               borderRadius: dimensions.width * 0.043,
-              alignSelf: 'center',
-
+              width: dimensions.width * 0.9,
             }}
           />
 
           <Text
             style={{
-              fontFamily: fontSFProTextRegular,
-              color: 'white',
-              fontSize: dimensions.width * 0.059,
-              textAlign: 'left',
-              fontWeight: 700,
-              marginTop: dimensions.height * 0.03,
               paddingHorizontal: dimensions.width * 0.05,
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: dimensions.width * 0.059,
+              fontFamily: fontSFProTextRegular,
+              marginTop: dimensions.height * 0.03,
+              textAlign: 'left',
             }}>
-            {admiralQuestionsData[currentAdmiralQuestionIndex].question}
+            {admiralQuestionsData[currentTieKnotsQuestionIndex].question}
           </Text>
 
-          {admiralQuestionsData[currentAdmiralQuestionIndex].answers.map((answ, index) => (
+          {admiralQuestionsData[currentTieKnotsQuestionIndex].answers.map((answ, index) => (
             <TouchableOpacity
+              disabled={!isTieKnotsReplyButtonActive}
               onPress={() => {
-                setSelectedAdmiralAnswer(answ.answer);
-                handleAnswerSelect(answ.isCorrect);
+                setSelectedTieKnotsAnswer(answ.answer);
+                handleTieKnotsAnswerSelect(answ.isCorrect);
               }}
               key={index}
               style={{
-                width: dimensions.width * 0.9,
-                alignSelf: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: selectedAdmiralAnswer === answ.answer ? answerBgColor : 'white',
                 borderRadius: dimensions.width * 0.0331,
-                paddingHorizontal: dimensions.width * 0.05,
-                marginTop: dimensions.height * 0.0255,
                 flexDirection: 'row',
                 justifyContent: 'center',
-                height: dimensions.height * 0.07,
+                backgroundColor: selectedTieKnotsAnswer === answ.answer ? answerBgColor : '#fff',
+                alignItems: 'center',
+                paddingHorizontal: dimensions.width * 0.05,
+                marginTop: dimensions.height * 0.0255,
+                width: dimensions.width * 0.9,
+                justifyContent: 'center',
+                alignSelf: 'center',
+                height: dimensions.height * 0.0691,
               }}>
               <Text
                 style={{
                   fontSize: dimensions.width * 0.043,
-                  fontFamily: fontSFProTextRegular,
-                  color: selectedAdmiralAnswer === answ.answer ? 'white' : 'black',
-                  textShadowRadius: 1,
                   fontWeight: 700,
+                  fontFamily: fontSFProTextRegular,
+                  color: selectedTieKnotsAnswer === answ.answer ? '#fff' : '#000',
+                  textShadowRadius: 1,
                   textAlign: 'center',
                 }}
               >
@@ -273,7 +273,7 @@ const TieKnotsGamesScreen = ({ setSelectedAdmiralScreen, }) => {
             </TouchableOpacity>
           ))}
         </View>
-      ) : isAdmiralGameStarted && admiralGameType === 'Find the knot' ? (
+      ) : isTieKnotsGameStarted && tieKnotsAdmiralGameType === 'Find the knot' ? (
 
         <View style={{
           alignSelf: 'center',
@@ -286,55 +286,61 @@ const TieKnotsGamesScreen = ({ setSelectedAdmiralScreen, }) => {
             justifyContent: 'space-between',
             alignItems: 'stretch',
           }}>
-            <TouchableOpacity onPress={() => {
-              setSelectedAdmiralAnswer(admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[0]);
-              handleKnotChoose(admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[0].isCorrect);
-            }}>
+            <TouchableOpacity
+              disabled={!isTieKnotsReplyButtonActive}
+              onPress={() => {
+                setSelectedTieKnotsAnswer(admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[0]);
+                handleKnotChoose(admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[0].isCorrect);
+              }}>
               <Image
-                source={admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[0].answerImage}
+                source={admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[0].answerImage}
                 style={{
-                  width: dimensions.width * 0.44,
+                  borderWidth: selectedTieKnotsAnswer === admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[0] ? dimensions.width * 0.01 : 0,
                   height: dimensions.height * 0.25,
+                  width: dimensions.width * 0.4402,
                   borderRadius: dimensions.width * 0.043,
-                  borderWidth: selectedAdmiralAnswer === admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[0] ? dimensions.width * 0.01 : 0,
-                  borderColor: admiralBorderColor,
+                  borderColor: tieKnotsBorderColor,
                 }}
                 resizeMode='stretch'
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {
-              setSelectedAdmiralAnswer(admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[1]);
-              handleKnotChoose(admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[1].isCorrect);
-            }}>
+            <TouchableOpacity
+              disabled={!isTieKnotsReplyButtonActive}
+              onPress={() => {
+                setSelectedTieKnotsAnswer(admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[1]);
+                handleKnotChoose(admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[1].isCorrect);
+              }}>
               <Image
-                source={admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[1].answerImage}
+                source={admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[1].answerImage}
                 style={{
-                  width: dimensions.width * 0.44,
+                  borderColor: tieKnotsBorderColor,
                   height: dimensions.height * 0.25,
+                  borderWidth: selectedTieKnotsAnswer === admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[1] ? dimensions.width * 0.01 : 0,
+                  width: dimensions.width * 0.44,
                   borderRadius: dimensions.width * 0.043,
-                  borderWidth: selectedAdmiralAnswer === admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[1] ? dimensions.width * 0.01 : 0,
-                  borderColor: admiralBorderColor,
                 }}
                 resizeMode='contain'
               />
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity onPress={() => {
-            setSelectedAdmiralAnswer(admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[2]);
-            handleKnotChoose(admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[2].isCorrect);
-          }}>
+          <TouchableOpacity
+            disabled={!isTieKnotsReplyButtonActive}
+            onPress={() => {
+              setSelectedTieKnotsAnswer(admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[2]);
+              handleKnotChoose(admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[2].isCorrect);
+            }}>
             <Image
-              source={admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[2].answerImage}
+              source={admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[2].answerImage}
               style={{
-                width: dimensions.width * 0.9,
-                height: dimensions.height * 0.4,
+                borderColor: tieKnotsBorderColor,
+                height: dimensions.height * 0.39999,
                 alignSelf: 'center',
                 marginTop: dimensions.height * 0.01,
+                width: dimensions.width * 0.8999,
+                borderWidth: selectedTieKnotsAnswer === admiralFindTheKnotData[currentTieKnotsQuestionIndex].answers[2] ? dimensions.width * 0.01 : 0,
                 borderRadius: dimensions.width * 0.043,
-                borderWidth: selectedAdmiralAnswer === admiralFindTheKnotData[currentAdmiralQuestionIndex].answers[2] ? dimensions.width * 0.01 : 0,
-                borderColor: admiralBorderColor,
               }}
               resizeMode='stretch'
             />
@@ -342,15 +348,15 @@ const TieKnotsGamesScreen = ({ setSelectedAdmiralScreen, }) => {
 
           <Text
             style={{
-              fontFamily: fontSFProTextRegular,
-              color: 'white',
+              paddingHorizontal: dimensions.width * 0.05,
+              marginTop: dimensions.height * 0.03,
+              color: '#fff',
               fontSize: dimensions.width * 0.059,
               textAlign: 'left',
               fontWeight: 700,
-              marginTop: dimensions.height * 0.03,
-              paddingHorizontal: dimensions.width * 0.05,
+              fontFamily: fontSFProTextRegular,
             }}>
-            {admiralQuestionsData[currentAdmiralQuestionIndex].question}
+            {admiralQuestionsData[currentTieKnotsQuestionIndex].question}
           </Text>
         </View>
       ) : null}

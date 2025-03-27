@@ -7,17 +7,17 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loadHereUser = async () => {
+    const loadTieKnotUser = async () => {
       try {
-        const storedHereUser = await AsyncStorage.getItem('currentUser');
-        if (storedHereUser) {
-          setUser(JSON.parse(storedHereUser));
+        const storedTieKnotUser = await AsyncStorage.getItem('currentUser');
+        if (storedTieKnotUser) {
+          setUser(JSON.parse(storedTieKnotUser));
         }
       } catch (error) {
-        console.error('Error loading user data:', error);
+        console.error('Error loading storedTieKnotUser data:', error);
       }
     };
-    loadHereUser();
+    loadTieKnotUser();
   }, []);
 
   const logout = async () => {
