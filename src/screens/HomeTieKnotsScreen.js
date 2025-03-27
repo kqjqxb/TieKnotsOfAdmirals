@@ -24,17 +24,17 @@ const bottomTieKnotsBtns = [
   {
     id: 1,
     tieKnotsScreen: 'AdmiralGames',
-    tieKnotsBtnIcon: require('../assets/icons/admiralUpIcons/admiralGameIcon.png'),
+    tieKnotsBtnIcon: require('../assets/icons/tieKnotsUpIcons/admiralGameIcon.png'),
   },
   {
     id: 3,
     tieKnotsScreen: 'Favourites',
-    tieKnotsBtnIcon: require('../assets/icons/admiralUpIcons/admiralFavoriteIcon.png'),
+    tieKnotsBtnIcon: require('../assets/icons/tieKnotsUpIcons/admiralFavoriteIcon.png'),
   },
   {
     id: 4,
     tieKnotsScreen: 'Settings',
-    tieKnotsBtnIcon: require('../assets/icons/admiralUpIcons/admiralSettingsIcon.png'),
+    tieKnotsBtnIcon: require('../assets/icons/tieKnotsUpIcons/admiralSettingsIcon.png'),
   },
 ]
 
