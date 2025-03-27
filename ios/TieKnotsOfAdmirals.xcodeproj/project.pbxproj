@@ -10,8 +10,16 @@
 		0C80B921A6F3F58F76C31292 /* libPods-TieKnotsOfAdmirals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TieKnotsOfAdmirals.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		156ED9D0F7D3DCCA92A74073 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		4202584E4BFA4972AC4FE0D7 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CCCC61DFDE664ADE8B1C67E2 /* SFProText-Medium.ttf */; };
+		69F6D1CE170740F084D34CCB /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2899EB302B9446D3BFD45B07 /* SF-Pro-Display-Medium.otf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+		7870DB9E6A0140E8B2F37ABF /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57BFB8A213DC4C88B9D2C0E9 /* SFProText-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9E36AB94701F4BF7B02B96BC /* SFProText-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E166C3E27B4937A160818B /* SFProText-Heavy.ttf */; };
+		AFFDEB2E704749CCA649CA7A /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6F3F660452241CAAF7F5D3C /* SFProText-Bold.ttf */; };
+		BEAFB69E884F4C9BA86FECDB /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DA6BB0DA65946468F468BEB /* SF-Pro-Display-Bold.otf */; };
+		D03132132998472DAB325109 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7CB5428362D4722ABC4AEE7 /* SF-Pro-Display-Regular.otf */; };
+		D0A42BE6B654449394C790CD /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = DADF47952A344327827B8990 /* SF-Pro-Display-Black.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,11 +27,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TieKnotsOfAdmirals/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TieKnotsOfAdmirals/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = TieKnotsOfAdmirals/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2899EB302B9446D3BFD45B07 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Medium.otf"; path = "../src/assets/fonts/SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		29E166C3E27B4937A160818B /* SFProText-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProText-Heavy.ttf"; path = "../src/assets/fonts/SFProText-Heavy.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-TieKnotsOfAdmirals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TieKnotsOfAdmirals.debug.xcconfig"; path = "Target Support Files/Pods-TieKnotsOfAdmirals/Pods-TieKnotsOfAdmirals.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-TieKnotsOfAdmirals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TieKnotsOfAdmirals.release.xcconfig"; path = "Target Support Files/Pods-TieKnotsOfAdmirals/Pods-TieKnotsOfAdmirals.release.xcconfig"; sourceTree = "<group>"; };
+		57BFB8A213DC4C88B9D2C0E9 /* SFProText-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProText-Regular.ttf"; path = "../src/assets/fonts/SFProText-Regular.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-TieKnotsOfAdmirals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TieKnotsOfAdmirals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA6BB0DA65946468F468BEB /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Bold.otf"; path = "../src/assets/fonts/SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TieKnotsOfAdmirals/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TieKnotsOfAdmirals/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C7CB5428362D4722ABC4AEE7 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Regular.otf"; path = "../src/assets/fonts/SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		CCCC61DFDE664ADE8B1C67E2 /* SFProText-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProText-Medium.ttf"; path = "../src/assets/fonts/SFProText-Medium.ttf"; sourceTree = "<group>"; };
+		DADF47952A344327827B8990 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Black.otf"; path = "../src/assets/fonts/SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
+		E6F3F660452241CAAF7F5D3C /* SFProText-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProText-Bold.ttf"; path = "../src/assets/fonts/SFProText-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,6 +67,22 @@
 			name = TieKnotsOfAdmirals;
 			sourceTree = "<group>";
 		};
+		19BC58370A6F423A937E7A6B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DADF47952A344327827B8990 /* SF-Pro-Display-Black.otf */,
+				6DA6BB0DA65946468F468BEB /* SF-Pro-Display-Bold.otf */,
+				2899EB302B9446D3BFD45B07 /* SF-Pro-Display-Medium.otf */,
+				C7CB5428362D4722ABC4AEE7 /* SF-Pro-Display-Regular.otf */,
+				E6F3F660452241CAAF7F5D3C /* SFProText-Bold.ttf */,
+				29E166C3E27B4937A160818B /* SFProText-Heavy.ttf */,
+				CCCC61DFDE664ADE8B1C67E2 /* SFProText-Medium.ttf */,
+				57BFB8A213DC4C88B9D2C0E9 /* SFProText-Regular.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +107,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				19BC58370A6F423A937E7A6B /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -161,6 +194,14 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				156ED9D0F7D3DCCA92A74073 /* PrivacyInfo.xcprivacy in Resources */,
+				D0A42BE6B654449394C790CD /* SF-Pro-Display-Black.otf in Resources */,
+				BEAFB69E884F4C9BA86FECDB /* SF-Pro-Display-Bold.otf in Resources */,
+				69F6D1CE170740F084D34CCB /* SF-Pro-Display-Medium.otf in Resources */,
+				D03132132998472DAB325109 /* SF-Pro-Display-Regular.otf in Resources */,
+				AFFDEB2E704749CCA649CA7A /* SFProText-Bold.ttf in Resources */,
+				9E36AB94701F4BF7B02B96BC /* SFProText-Heavy.ttf in Resources */,
+				4202584E4BFA4972AC4FE0D7 /* SFProText-Medium.ttf in Resources */,
+				7870DB9E6A0140E8B2F37ABF /* SFProText-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
