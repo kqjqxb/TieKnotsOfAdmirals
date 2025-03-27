@@ -180,10 +180,8 @@ const TieKnotsGamesScreen = ({ setSelectedTieKnotsScreen, }) => {
           <TouchableOpacity
             key={game.id}
             onPress={() => {
-              // setTieKnotsAdmiralGameType(game.title);
-              // setIsTieKnotsGameStarted(true);
-
-              isTieKnotsGameStarted();
+              setTieKnotsAdmiralGameType(game.title);
+              setIsTieKnotsGameStarted(true);
             }}
             style={{
               marginBottom: dimensions.height * 0.034,

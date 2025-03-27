@@ -63,8 +63,7 @@ const SettingsTieKnotsScreen = ({ setSelectedTieKnotsScreen, }) => {
               marginRight: dimensions.width * 0.043,
             }}
               onPress={() => {
-                // setSelectedTieKnotsScreen('Home');
-                tieKnotsBackButton();
+                setSelectedTieKnotsScreen('Home');
               }}
             >
               <Image

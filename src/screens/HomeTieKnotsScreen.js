@@ -270,13 +270,11 @@ const HomeTieKnotsScreen = () => {
                   marginRight: dimensions.width * 0.043,
                 }}
                   onPress={() => {
-                    // if (isKnotVisible) {
-                    //   setIsKnotVisible(false);
-                    // } else {
-                    //   setIsActivityVisible(false);
-                    // }
-
-                    tieKnotBack();
+                    if (isKnotVisible) {
+                      setIsKnotVisible(false);
+                    } else {
+                      setIsActivityVisible(false);
+                    }
                   }}
                 >
                   <Image
