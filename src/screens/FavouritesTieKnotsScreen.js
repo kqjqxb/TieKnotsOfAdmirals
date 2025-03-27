@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Animated,
 } from 'react-native';
 
 const fontSFProTextRegular = 'SFProText-Regular';
@@ -17,11 +18,15 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
   const [isKnotVisible, setIsKnotVisible] = useState(false);
   const [selectedKnot, setSelectedKnot] = useState(null);
+  const [currentFavTieKnotIndex, setCurrentFavTieKnotIndex] = useState(0);
+  const scrollFavTieKnotsX = useRef(new Animated.Value(0)).current;
+  const slidesFavTieKnotsRef = useRef(null);
 
-  const handleDeleteKnot = async (id) => {
+  const handleDeleteFavKnot = async (id) => {
     try {
       const updatedFavKnots = savedKnots.filter(kn => kn.id !== id);
       setSavedKnots(updatedFavKnots);
+      setIsKnotVisible(false);
       await AsyncStorage.setItem('savedKnots', JSON.stringify(updatedFavKnots));
     } catch (error) {
       console.error("Error deleting place:", error);
@@ -30,18 +35,18 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
 
   return (
     <SafeAreaView style={{
-      flex: 1,
       paddingHorizontal: dimensions.width * 0.05,
+      flex: 1,
       width: dimensions.width,
     }}>
       <View style={{
-        justifyContent: 'space-between',
-        paddingHorizontal: dimensions.width * 0.05,
-        marginBottom: dimensions.height * 0.025,
+        alignSelf: 'flex-start',
         flexDirection: 'row',
+        marginBottom: dimensions.height * 0.025,
+        justifyContent: 'space-between',
         alignItems: 'center',
         width: dimensions.width,
-        alignSelf: 'flex-start',
+        paddingHorizontal: dimensions.width * 0.05,
       }}>
         <View style={{
           justifyContent: 'center',
@@ -82,7 +87,7 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
           opacity: isKnotVisible ? 1 : 0,
         }}
           disabled={!selectedKnot}
-          onPress={() => handleDeleteKnot(selectedKnot.id)}
+          onPress={() => handleDeleteFavKnot(selectedKnot.id)}
         >
           <Image
             source={require('../assets/icons/goldHeartIcon.png')}
@@ -194,7 +199,7 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
                   <TouchableOpacity style={{
                     zIndex: 100,
                   }}
-                    onPress={() => handleDeleteKnot(savedKnot.id)}
+                    onPress={() => handleDeleteFavKnot(savedKnot.id)}
                   >
                     <Image
                       source={require('../assets/icons/goldHeartIcon.png')}
@@ -226,11 +231,11 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
               horizontal
               pagingEnabled
               showsHorizontalScrollIndicator={false}
-              onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+              onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollFavTieKnotsX } } }], {
                 useNativeDriver: false,
               })}
               scrollEventThrottle={32}
-              ref={slidesRef}
+              ref={slidesFavTieKnotsRef}
             >
               {selectedKnot.stepImages.map((item, index) => {
                 if (index < selectedKnot.stepImages.length) {
@@ -287,18 +292,18 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
               flex: 1,
             }}>
               <TouchableOpacity onPress={() => {
-                if (currentIndex > 0) {
-                  const newIndex = currentIndex - 1;
-                  slidesRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
-                  setCurrentIndex(newIndex);
+                if (currentFavTieKnotIndex > 0) {
+                  const newIndex = currentFavTieKnotIndex - 1;
+                  slidesFavTieKnotsRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
+                  setCurrentFavTieKnotIndex(newIndex);
                 }
               }}
-                disabled={currentIndex === 0}
+                disabled={currentFavTieKnotIndex === 0}
               >
                 <Image
                   source={require('../assets/icons/chevronLeftIcon.png')}
                   style={{
-                    opacity: currentIndex > 0 ? 1 : 0.5,
+                    opacity: currentFavTieKnotIndex > 0 ? 1 : 0.5,
                     height: dimensions.height * 0.03,
                     width: dimensions.height * 0.03,
                   }}
@@ -316,20 +321,20 @@ const FavouritesTieKnotsScreen = ({ setSelectedTieKnotsScreen, savedKnots, setSa
               </View>
 
               <TouchableOpacity onPress={() => {
-                if (currentIndex < selectedKnot.stepImages.length - 1) {
-                  const newIndex = currentIndex + 1;
-                  slidesRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
-                  setCurrentIndex(newIndex);
+                if (currentFavTieKnotIndex < selectedKnot.stepImages.length - 1) {
+                  const newIndex = currentFavTieKnotIndex + 1;
+                  slidesFavTieKnotsRef.current?.scrollTo({ x: newIndex * dimensions.width * 0.9, animated: true });
+                  setCurrentFavTieKnotIndex(newIndex);
                 }
               }}
-                disabled={currentIndex === selectedKnot.stepImages.length - 1}
+                disabled={currentFavTieKnotIndex === selectedKnot.stepImages.length - 1}
               >
                 <Image
                   source={require('../assets/icons/chevronRightIcon.png')}
                   style={{
                     width: dimensions.height * 0.03,
                     height: dimensions.height * 0.03,
-                    opacity: currentIndex < selectedKnot.stepImages.length - 1 ? 1 : 0.5,
+                    opacity: currentFavTieKnotIndex < selectedKnot.stepImages.length - 1 ? 1 : 0.5,
                   }}
                   resizeMode='contain'
                 />
