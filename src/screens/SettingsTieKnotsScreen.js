@@ -54,9 +54,7 @@ const SettingsTieKnotsScreen = ({ setSelectedTieKnotsScreen, }) => {
         }}>
           <View style={{
             justifyContent: 'center',
-            
             alignItems: 'center',
-
             flexDirection: 'row',
           }}>
             <TouchableOpacity style={{

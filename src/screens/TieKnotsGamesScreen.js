@@ -198,12 +198,12 @@ const TieKnotsGamesScreen = ({ setSelectedTieKnotsScreen, }) => {
             />
             <Text
               style={{
-                marginTop: dimensions.height * 0.014,
                 color: '#fff',
-                fontWeight: 700,
-                fontSize: dimensions.width * 0.055,
-                textAlign: 'left',
+                marginTop: dimensions.height * 0.014,
                 fontFamily: fontSFProTextRegular,
+                textAlign: 'left',
+                fontSize: dimensions.width * 0.055,
+                fontWeight: 700,
               }}>
               {game.title}
             </Text>

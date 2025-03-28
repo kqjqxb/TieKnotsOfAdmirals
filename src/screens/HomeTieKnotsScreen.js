@@ -145,6 +145,7 @@ const HomeTieKnotsScreen = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               width: dimensions.width,
+              paddingTop: dimensions.height * 0.01,
             }}>
               <Text
                 style={{
